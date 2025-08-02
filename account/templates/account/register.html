@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Register user</h3>
+<form active="" method='post'class='col-md-6',novalidate>
+     {% csrf_token %}
+     {{form.as_p}}
+     <input type="submit" value="Register">
+{% endblock  %}

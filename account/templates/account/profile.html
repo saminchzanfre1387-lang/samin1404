@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class='card'>
+    {% if request.user.id == user.id %}
+        <a href='{% url "home:post_create" %}' class='btn btn-primary'>Create</a>
+    {% elif request.user.id != user.id and not is_following %}
+        <a class='btn btn-primary' href="{% url 'account:user_follow' user.id %}">Follow</a>
+    {% elif request.user.id != user.id and is_following %}
+        <a class='btn btn-secondary' href="{% url 'account:user_unfollow' user.id %}">Unfollow</a>
+    {% endif %}
+
+    {% for post in posts %}
+        <a href="{{ post.get_absolute_url }}" class="card-body d-block border p-2 my-2">
+            {{ post.body|truncatewords:8 }}
+        </a>
+    {% endfor %}
+</h2>
+{% endblock %}
